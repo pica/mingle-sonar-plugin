@@ -7,7 +7,7 @@
     <packaging>sonar-plugin</packaging>
     <version>0.1-SNAPSHOT</version>
     <name>Mingle plugin for sonar</name>
-    <description>plugin description</description>
+    <description>Mingle Plugin for Sonar.</description>
 
     <!-- optional -->
     <organization>
@@ -27,6 +27,23 @@
             <version>2.6</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>3.0.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-xml</artifactId>
+            <version>3.0.6.RELEASE</version>
+        </dependency>
+
+        <!--<dependency>-->
+        <!--<groupId>org.springframework</groupId>-->
+        <!--<artifactId>spring</artifactId>-->
+        <!--<version>3.0</version></version>-->
+        <!--</dependency>-->
+
         <!-- add your dependencies here -->
 
         <!-- unit tests -->
@@ -35,6 +52,24 @@
             <artifactId>sonar-testing-harness</artifactId>
             <version>2.10</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.8.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>1.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.ws</groupId>
+            <artifactId>spring-xml</artifactId>
+            <version>1.5.9</version>
         </dependency>
     </dependencies>
 
