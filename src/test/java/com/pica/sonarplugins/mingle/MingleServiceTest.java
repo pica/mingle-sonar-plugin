@@ -50,9 +50,6 @@ public class MingleServiceTest {
     @Test
     public void testCountResourcesCountsCardsInReturnedXmlProperly() throws Exception {
         assertThat(service.countDefects(PROJECT_NAME, FILTER), equalTo(2)) ;
-    }
-
-
-
+    }    
 
 }
