@@ -5,8 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Matchers;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.xml.xpath.Jaxp13XPathTemplate;
-import org.springframework.xml.xpath.XPathOperations;
 
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
@@ -28,19 +26,16 @@ public class MingleServiceTest {
 
     private RestTemplate restTemplate;
     private Source source;
-    private XPathOperations xpathTemplate;
 
     @Before
     public void setUp() throws Exception {
         source = new StreamSource(new java.io.StringReader(XML));
 
         restTemplate = mock(RestTemplate.class);
-        xpathTemplate = new Jaxp13XPathTemplate();
 
         service = new MingleService();
         service.setUrl(URL);
         service.setRestTemplate(restTemplate);
-        service.setXpathTemplate(xpathTemplate);
 
         when(restTemplate.getForObject(Matchers.<String>any(), eq(Source.class), Matchers.<String>any(), Matchers.<String>any())).thenReturn(source);
 

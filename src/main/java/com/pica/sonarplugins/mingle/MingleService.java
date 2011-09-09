@@ -1,6 +1,7 @@
 package com.pica.sonarplugins.mingle;
 
 import org.springframework.web.client.RestTemplate;
+import org.springframework.xml.xpath.Jaxp13XPathTemplate;
 import org.springframework.xml.xpath.XPathOperations;
 
 import javax.xml.transform.Source;
@@ -15,7 +16,7 @@ import javax.xml.transform.Source;
 public class MingleService {
     RestTemplate restTemplate;
     private String url;
-    private XPathOperations xpathTemplate;
+    private XPathOperations xpathTemplate = new Jaxp13XPathTemplate();
 
     public int countDefects(final String projectName, final String filter) {
         Source source = restTemplate.getForObject(url + "/api/v2/projects/{projectName}/cards.xml?filters[]={filter}", Source.class, projectName, filter);
