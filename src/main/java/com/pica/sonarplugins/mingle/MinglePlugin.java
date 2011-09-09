@@ -12,7 +12,7 @@ import java.util.List;
                 key = MinglePlugin.URL,
                 defaultValue = "",
                 name = "Server URL",
-                description = "Example : http://jira.codehaus.org",
+                description = "URL to your mingle server Example : http://mingle.yourcompany.com",
                 global = true,
                 project = true,
                 module = false
@@ -34,10 +34,19 @@ import java.util.List;
                 module = false
         ),
         @Property(
-                key = MinglePlugin.VIEW,
+                key = MinglePlugin.PROJECTS,
                 defaultValue = "",
-                name = "View name",
-                description = "Case sensitive, example : SONAR-current-iteration",
+                description = "Comma separated list of projects to query",
+                name = "Password",
+                global = true,
+                project = true,
+                module = false
+        ),
+        @Property(
+                key = MinglePlugin.FILTER,
+                defaultValue = "",
+                name = "Filter String",
+                description = "Mingle api filter string to find defect cards",
                 global = false,
                 project = true,
                 module = true
@@ -45,10 +54,11 @@ import java.util.List;
 })
 public class MinglePlugin implements Plugin {
 
-    private static final String URL = "mingleplugin.url";
-    private static final String USER = "mingleplugin.user";
-    private static final String PASSWORD = "mingleplugin.password";
-    private static final String VIEW = "mingleplugin.filter";
+    public static final String URL = "mingleplugin.url";
+    public static final String USER = "mingleplugin.user";
+    public static final String PASSWORD = "mingleplugin.password";
+    public static final String FILTER = "mingleplugin.filter";
+    public static final String PROJECTS = "mingleplugin.projects";
 
     /**
      * @deprecated this is not used anymore
@@ -61,14 +71,14 @@ public class MinglePlugin implements Plugin {
      * @deprecated this is not used anymore
      */
     public String getName() {
-        return "My Sonar plugin";
+        return "Mingle Sonar Plugin";
     }
 
     /**
      * @deprecated this is not used anymore
      */
     public String getDescription() {
-        return "You shouldn't expect too much from this plugin except displaying the Hello World message.";
+        return "Sonar plugin to gather defect information from mingle.";
     }
 
     // This is where you're going to declare all your Sonar extensions
