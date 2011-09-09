@@ -38,7 +38,6 @@ public class MingleServiceTest {
         service.setRestTemplate(restTemplate);
 
         when(restTemplate.getForObject(Matchers.<String>any(), eq(Source.class), Matchers.<String>any(), Matchers.<String>any())).thenReturn(source);
-
     }
 
     @Test
