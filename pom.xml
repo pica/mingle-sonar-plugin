@@ -9,12 +9,6 @@
     <name>Mingle plugin for sonar</name>
     <description>Mingle Plugin for Sonar.</description>
 
-    <!-- optional -->
-    <organization>
-        <name>My company</name>
-        <url>http://www.mycompany.com</url>
-    </organization>
-
     <dependencies>
         <dependency>
             <groupId>org.codehaus.sonar</groupId>
@@ -73,6 +67,21 @@
         </dependency>
 
     </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>pica-releases</id>
+            <name>Pica Release Repository</name>
+            <url>http://mvnrepository.picagroup.net/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <uniqueVersion>true</uniqueVersion>
+            <id>pica-snapshots</id>
+            <name>Pica Snapshot Repository</name>
+            <url>http://mvnrepository.picagroup.net/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <build>
         <plugins>
