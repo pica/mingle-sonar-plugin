@@ -24,11 +24,11 @@ import org.sonar.api.web.*;
 public class MingleDashboardWidget extends AbstractRubyTemplate implements RubyRailsWidget {
 
   public String getId() {
-    return "sample";
+    return "defects";
   }
 
   public String getTitle() {
-    return "Sample";
+    return "Defects";
   }
 
   @Override
