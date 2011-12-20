@@ -37,18 +37,32 @@ public class MingleServiceTest {
         service.setUrl(URL);
         service.setRestTemplate(restTemplate);
 
-        when(restTemplate.getForObject(Matchers.<String>any(), eq(Source.class), Matchers.<String>any(), Matchers.<String>any())).thenReturn(source);
+        when(restTemplate.getForObject(Matchers.<String>any(), eq(Source.class), Matchers.<String>any())).thenReturn(source);
     }
 
     @Test
-    public void testCountResourcesCallsRestTemplateWithTheCorrectParameters() throws Exception {
-        final String expectedPath = URL + "/api/v2/projects/{projectName}/cards.xml?filters[]={filter}";
+    public void testCountDefects_singleFilters_callsGetForObject() throws Exception {
+        final String expectedPath = URL + "/api/v2/projects/{projectName}/cards.xml?filters[]=filter";
         service.countDefects(PROJECT_NAME, FILTER);
-        verify(restTemplate).getForObject(expectedPath, Source.class, PROJECT_NAME, FILTER);
+        verify(restTemplate).getForObject(expectedPath, Source.class, PROJECT_NAME);
     }
 
     @Test
-    public void testCountResourcesCountsCardsInReturnedXmlProperly() throws Exception {
+    public void testCountDefects_multipleFilters_callsGetForObject() throws Exception {
+        final String expectedPath = URL + "/api/v2/projects/{projectName}/cards.xml?filters[]=[type][is]defect]&filters[]=[filter][is][on]";
+        service.countDefects(PROJECT_NAME, "[type][is]defect],[filter][is][on]");
+        verify(restTemplate).getForObject(expectedPath, Source.class, PROJECT_NAME);
+    }
+
+    @Test
+    public void testCountDefects_noFilters_callsGetForObject() throws Exception {
+        final String expectedPath = URL + "/api/v2/projects/{projectName}/cards.xml";
+        service.countDefects(PROJECT_NAME, "");
+        verify(restTemplate).getForObject(expectedPath, Source.class, PROJECT_NAME);
+    }
+
+    @Test
+    public void testCountDefects_singleFilter_parsesXml() throws Exception {
         assertThat(service.countDefects(PROJECT_NAME, FILTER), equalTo(2)) ;
     }    
 
