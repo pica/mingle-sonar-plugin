@@ -37,7 +37,7 @@ import java.util.List;
                 key = MinglePlugin.PROJECTS,
                 defaultValue = "",
                 description = "Comma separated list of projects to query",
-                name = "Password",
+                name = "Projects",
                 global = true,
                 project = true,
                 module = false
@@ -45,8 +45,8 @@ import java.util.List;
         @Property(
                 key = MinglePlugin.FILTER,
                 defaultValue = "",
-                name = "Filter String",
-                description = "Mingle api filter string to find defect cards",
+                name = "Filter Strings",
+                description = "Comma seperated list of mingle api filter strings to find defect cards",
                 global = false,
                 project = true,
                 module = true
