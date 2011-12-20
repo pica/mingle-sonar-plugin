@@ -23,13 +23,22 @@ public class MingleSensor implements Sensor {
         String filter = project.getConfiguration().getString(MinglePlugin.FILTER);
         String projects = project.getConfiguration().getString(MinglePlugin.PROJECTS);
 
-
-        service = new MingleService(user, password, url);
-
         int defects = 0;
-        for (String projectName : projects.split(",")) {
-            defects += service.countDefects(StringUtils.trim(projectName), filter);
+
+        try {
+            service = new MingleService(user, password, url);
+
+
+            if (StringUtils.isNotBlank(projects)) {
+                for (String projectName : projects.split(",")) {
+                    defects += service.countDefects(StringUtils.trim(projectName), filter);
+                }
+
+            }
+        } catch (Exception e) {
+            //TODO - Don't do this...handle errors properly
         }
+
 
         saveDefectsMeasure(sensorContext, defects);
     }
