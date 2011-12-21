@@ -14,7 +14,7 @@ import java.util.List;
                 name = "Server URL",
                 description = "URL to your mingle server Example : http://mingle.yourcompany.com",
                 global = true,
-                project = true,
+                project = false,
                 module = false
         ),
         @Property(
@@ -22,7 +22,7 @@ import java.util.List;
                 defaultValue = "",
                 name = "Username",
                 global = true,
-                project = true,
+                project = false,
                 module = false
         ),
         @Property(
@@ -30,7 +30,7 @@ import java.util.List;
                 defaultValue = "",
                 name = "Password",
                 global = true,
-                project = true,
+                project = false,
                 module = false
         ),
         @Property(
@@ -39,17 +39,17 @@ import java.util.List;
                 description = "Comma separated list of projects to query",
                 name = "Projects",
                 global = true,
-                project = true,
+                project = false,
                 module = false
         ),
         @Property(
                 key = MinglePlugin.FILTER,
-                defaultValue = "",
+                defaultValue = "[type][is][Defect]",
                 name = "Filter Strings",
-                description = "Comma seperated list of mingle api filter strings to find defect cards",
+                description = "Comma separated list of mingle api filter strings to find defect cards",
                 global = false,
                 project = true,
-                module = true
+                module = false
         )
 })
 public class MinglePlugin implements Plugin {
