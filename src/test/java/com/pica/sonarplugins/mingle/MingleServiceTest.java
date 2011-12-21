@@ -8,6 +8,9 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -19,7 +22,7 @@ import static org.mockito.Mockito.when;
 public class MingleServiceTest {
 
     private MingleService service;
-    private static final String FILTER = "filter";
+    private static final List<String> FILTERS = Arrays.asList("filter");
     private static final String PROJECT_NAME = "projectName";
     private static final String URL = "url";
     private static final String XML = "<xml><card /><card /></xml>";
@@ -43,27 +46,27 @@ public class MingleServiceTest {
     @Test
     public void testCountDefects_singleFilters_callsGetForObject() throws Exception {
         final String expectedPath = URL + "/api/v2/projects/{projectName}/cards.xml?filters[]=filter";
-        service.countDefects(PROJECT_NAME, FILTER);
+        service.countDefects(PROJECT_NAME, FILTERS);
         verify(restTemplate).getForObject(expectedPath, Source.class, PROJECT_NAME);
     }
 
     @Test
     public void testCountDefects_multipleFilters_callsGetForObject() throws Exception {
-        final String expectedPath = URL + "/api/v2/projects/{projectName}/cards.xml?filters[]=[type][is]defect]&filters[]=[filter][is][on]";
-        service.countDefects(PROJECT_NAME, "[type][is]defect],[filter][is][on]");
+        final String expectedPath = URL + "/api/v2/projects/{projectName}/cards.xml?filters[]=[type][is][defect]&filters[]=[filter][is][on]";
+        service.countDefects(PROJECT_NAME, Arrays.asList("[type][is][defect]","[filter][is][on]"));
         verify(restTemplate).getForObject(expectedPath, Source.class, PROJECT_NAME);
     }
 
     @Test
     public void testCountDefects_noFilters_callsGetForObject() throws Exception {
         final String expectedPath = URL + "/api/v2/projects/{projectName}/cards.xml";
-        service.countDefects(PROJECT_NAME, "");
+        service.countDefects(PROJECT_NAME, new ArrayList<String>());
         verify(restTemplate).getForObject(expectedPath, Source.class, PROJECT_NAME);
     }
 
     @Test
     public void testCountDefects_singleFilter_parsesXml() throws Exception {
-        assertThat(service.countDefects(PROJECT_NAME, FILTER), equalTo(2)) ;
+        assertThat(service.countDefects(PROJECT_NAME, FILTERS), equalTo(2)) ;
     }    
 
 }
